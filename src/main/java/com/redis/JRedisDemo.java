@@ -32,7 +32,8 @@ public class JRedisDemo {
         System.out.println("读取数据:"+redis.get("testKey2"));
 
 
-        //测试git变化
+        //测试git变化,
+        //git测试2
     }
     
     public void test1(){     
