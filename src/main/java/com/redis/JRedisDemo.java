@@ -34,6 +34,7 @@ public class JRedisDemo {
 
         //测试git变化,
         //git测试2
+        //测试 push
     }
     
     public void test1(){     
