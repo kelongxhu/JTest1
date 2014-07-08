@@ -30,11 +30,14 @@ public class JRedisDemo {
 //        }
 
         System.out.println("读取数据:"+redis.get("testKey2"));
+
+
+        //测试git变化
     }
     
     public void test1(){     
         Jedis redis = new Jedis("172.26.35.130",6379);//连接redis
-        //redis.auth("redis");//验证密码     
+        //redis.auth("redis");//验证密码    iiiiiii
         /* -----------------------------------------------------------------------------------------------------------  */           
         /**  KEY操作   
            
