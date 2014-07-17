@@ -12,7 +12,7 @@ public class SubTest {
         try {
 
             jr = new Jedis("172.26.35.130", 6389);
-            final MyListener listener = new MyListener();
+            //final MyListener listener = new MyListener();
             //可以订阅多个频道
             //订阅得到信息在lister的onMessage(...)方法中进行处理
             //jedis.subscribe(listener, "foo", "watson");
