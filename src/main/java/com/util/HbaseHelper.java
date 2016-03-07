@@ -23,7 +23,7 @@ public class HbaseHelper {
 
     static {
         Configuration HBASE_CONFIG = HBaseConfiguration.create();
-        HBASE_CONFIG.set("hbase.zookeeper.quorum", "172.26.50.24,172.26.50.12,172.26.50.35");
+        HBASE_CONFIG.set("hbase.zookeeper.quorum", "172.26.50.24,172.26.50.28,172.26.50.65");
         HBASE_CONFIG.set("hbase.zookeeper.property.clientPort", "4181");
         cfg = new HBaseConfiguration(HBASE_CONFIG);
     }

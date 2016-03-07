@@ -1,0 +1,289 @@
+[Lorvex] loaded [], sites []
+[Harald Jaekelsson] loaded [], sites []
+[Griffin] loaded [], sites []
+[Donald Ritter] loaded [], sites []
+[Nico Minoru] loaded [], sites []
+Could not instantiate TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener]. Specify custom listener classes or make the default listener classes (and their required dependencies) available. Offending class: [org/springframework/web/context/request/RequestAttributes]
+Loading XML bean definitions from URL [file:/data/workspace/JTestPro/target/classes/applicationContext.xml]
+Refreshing org.springframework.context.support.GenericApplicationContext@136e2ea3: startup date [Wed Oct 28 16:55:50 CST 2015]; root of context hierarchy
+Loading properties file from URL [file:/data/workspace/JTestPro/target/classes/ServerConfig.properties]
+JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+Loaded JDBC driver: com.mysql.jdbc.Driver
+Using default implementation for ThreadExecutor
+Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+Quartz Scheduler v.2.2.1 created.
+RAMJobStore initialized.
+Scheduler meta-data: Quartz Scheduler (v2.2.1) 'schedulerFactoryBean' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+Quartz scheduler 'schedulerFactoryBean' initialized from an externally provided properties instance.
+Quartz scheduler version: 2.2.1
+JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@65c1781e
+[Frenzy] loaded [], sites []
+Shutting down Quartz Scheduler
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED shutting down.
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED paused.
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED shutdown complete.
+Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@64978ceb] to prepare test instance [ForumEsTest@19a4cbe5]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.DefaultTestContext.getApplicationContext(DefaultTestContext.java:101)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:109)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:75)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:331)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:213)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:290)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:292)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:233)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:87)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:176)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:160)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:74)
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:211)
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:67)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'esClient': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private java.lang.String com.es.util.EsClient.ip; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'ip' in string value "${ip}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:292)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1185)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:304)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:300)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:195)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:703)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:760)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:482)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:100)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:250)
+	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:64)
+	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:91)
+	... 23 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private java.lang.String com.es.util.EsClient.ip; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'ip' in string value "${ip}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:87)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:289)
+	... 39 more
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'ip' in string value "${ip}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:174)
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126)
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:194)
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:158)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer$2.resolveStringValue(PropertySourcesPlaceholderConfigurer.java:175)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:802)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:871)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:858)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:480)
+	... 41 more
+Could not instantiate TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener]. Specify custom listener classes or make the default listener classes (and their required dependencies) available. Offending class: [org/springframework/web/context/request/RequestAttributes]
+Loading XML bean definitions from URL [file:/data/workspace/JTestPro/target/classes/applicationContext.xml]
+Refreshing org.springframework.context.support.GenericApplicationContext@e5d1aef: startup date [Wed Oct 28 16:58:09 CST 2015]; root of context hierarchy
+Loading properties file from URL [file:/data/workspace/JTestPro/target/classes/ServerConfig.properties]
+JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+Loaded JDBC driver: com.mysql.jdbc.Driver
+Using default implementation for ThreadExecutor
+Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+Quartz Scheduler v.2.2.1 created.
+RAMJobStore initialized.
+Scheduler meta-data: Quartz Scheduler (v2.2.1) 'schedulerFactoryBean' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+Quartz scheduler 'schedulerFactoryBean' initialized from an externally provided properties instance.
+Quartz scheduler version: 2.2.1
+JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@5d708401
+[Obituary] loaded [], sites []
+Starting beans in phase 2147483647
+Starting Quartz Scheduler now
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED started.
+[Plunderer] loaded [], sites []
+Closing org.springframework.context.support.GenericApplicationContext@e5d1aef: startup date [Wed Oct 28 16:58:09 CST 2015]; root of context hierarchy
+Stopping beans in phase 2147483647
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED paused.
+Shutting down Quartz Scheduler
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED shutting down.
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED paused.
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED shutdown complete.
+Could not instantiate TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener]. Specify custom listener classes or make the default listener classes (and their required dependencies) available. Offending class: [org/springframework/web/context/request/RequestAttributes]
+Loading XML bean definitions from URL [file:/data/workspace/JTestPro/target/classes/applicationContext.xml]
+Refreshing org.springframework.context.support.GenericApplicationContext@267d5b1a: startup date [Wed Oct 28 16:59:53 CST 2015]; root of context hierarchy
+Loading properties file from URL [file:/data/workspace/JTestPro/target/classes/ServerConfig.properties]
+JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+Loaded JDBC driver: com.mysql.jdbc.Driver
+Using default implementation for ThreadExecutor
+Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+Quartz Scheduler v.2.2.1 created.
+RAMJobStore initialized.
+Scheduler meta-data: Quartz Scheduler (v2.2.1) 'schedulerFactoryBean' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+Quartz scheduler 'schedulerFactoryBean' initialized from an externally provided properties instance.
+Quartz scheduler version: 2.2.1
+JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@37620aae
+[Sybil Dorn] loaded [], sites []
+Starting beans in phase 2147483647
+Starting Quartz Scheduler now
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED started.
+[Magdalena] loaded [], sites []
+Closing org.springframework.context.support.GenericApplicationContext@267d5b1a: startup date [Wed Oct 28 16:59:53 CST 2015]; root of context hierarchy
+Stopping beans in phase 2147483647
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED paused.
+Shutting down Quartz Scheduler
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED shutting down.
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED paused.
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED shutdown complete.
+Could not instantiate TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener]. Specify custom listener classes or make the default listener classes (and their required dependencies) available. Offending class: [org/springframework/web/context/request/RequestAttributes]
+Loading XML bean definitions from URL [file:/data/workspace/JTestPro/target/classes/applicationContext.xml]
+Refreshing org.springframework.context.support.GenericApplicationContext@2934847: startup date [Wed Oct 28 17:10:34 CST 2015]; root of context hierarchy
+Loading properties file from URL [file:/data/workspace/JTestPro/target/classes/ServerConfig.properties]
+JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+Loaded JDBC driver: com.mysql.jdbc.Driver
+Using default implementation for ThreadExecutor
+Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+Quartz Scheduler v.2.2.1 created.
+RAMJobStore initialized.
+Scheduler meta-data: Quartz Scheduler (v2.2.1) 'schedulerFactoryBean' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+Quartz scheduler 'schedulerFactoryBean' initialized from an externally provided properties instance.
+Quartz scheduler version: 2.2.1
+JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@12742ffc
+[Tugun] loaded [], sites []
+Starting beans in phase 2147483647
+Starting Quartz Scheduler now
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED started.
+[Oracle] loaded [], sites []
+[Tugun] failed to get node info for [#transport#-1][SWD-LONGKE00-D1][inet[/172.26.32.18:9300]], disconnecting...
+org.elasticsearch.transport.ReceiveTimeoutTransportException: [][inet[/172.26.32.18:9300]][cluster/nodes/info] request_id [2] timed out after [5208ms]
+	at org.elasticsearch.transport.TransportService$TimeoutHandler.run(TransportService.java:370)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:722)
+[Oracle] Received response for a request that has timed out, sent [5211ms] ago, timed out [2ms] ago, action [cluster/nodes/info], node [[#transport#-1][SWD-LONGKE00-D1][inet[/172.26.32.18:9300]]], id [1]
+[Oracle] failed to get node info for [#transport#-1][SWD-LONGKE00-D1][inet[/172.26.32.18:9300]], disconnecting...
+org.elasticsearch.transport.ReceiveTimeoutTransportException: [][inet[/172.26.32.18:9300]][cluster/nodes/info] request_id [1] timed out after [5209ms]
+	at org.elasticsearch.transport.TransportService$TimeoutHandler.run(TransportService.java:370)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:722)
+Closing org.springframework.context.support.GenericApplicationContext@2934847: startup date [Wed Oct 28 17:10:34 CST 2015]; root of context hierarchy
+Stopping beans in phase 2147483647
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED paused.
+Shutting down Quartz Scheduler
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED shutting down.
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED paused.
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED shutdown complete.
+Could not instantiate TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener]. Specify custom listener classes or make the default listener classes (and their required dependencies) available. Offending class: [org/springframework/web/context/request/RequestAttributes]
+Loading XML bean definitions from URL [file:/data/workspace/JTestPro/target/classes/applicationContext.xml]
+Refreshing org.springframework.context.support.GenericApplicationContext@e5d1aef: startup date [Wed Oct 28 17:12:38 CST 2015]; root of context hierarchy
+Loading properties file from URL [file:/data/workspace/JTestPro/target/classes/ServerConfig.properties]
+JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+Loaded JDBC driver: com.mysql.jdbc.Driver
+Using default implementation for ThreadExecutor
+Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+Quartz Scheduler v.2.2.1 created.
+RAMJobStore initialized.
+Scheduler meta-data: Quartz Scheduler (v2.2.1) 'schedulerFactoryBean' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+Quartz scheduler 'schedulerFactoryBean' initialized from an externally provided properties instance.
+Quartz scheduler version: 2.2.1
+JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@22479390
+[Ozone] loaded [], sites []
+Starting beans in phase 2147483647
+Starting Quartz Scheduler now
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED started.
+[Lunatik] loaded [], sites []
+Could not instantiate TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener]. Specify custom listener classes or make the default listener classes (and their required dependencies) available. Offending class: [org/springframework/web/context/request/RequestAttributes]
+Loading XML bean definitions from URL [file:/data/workspace/JTestPro/target/classes/applicationContext.xml]
+Refreshing org.springframework.context.support.GenericApplicationContext@54415988: startup date [Wed Oct 28 17:13:43 CST 2015]; root of context hierarchy
+Loading properties file from URL [file:/data/workspace/JTestPro/target/classes/ServerConfig.properties]
+JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+Loaded JDBC driver: com.mysql.jdbc.Driver
+Using default implementation for ThreadExecutor
+Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+Quartz Scheduler v.2.2.1 created.
+RAMJobStore initialized.
+Scheduler meta-data: Quartz Scheduler (v2.2.1) 'schedulerFactoryBean' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+Quartz scheduler 'schedulerFactoryBean' initialized from an externally provided properties instance.
+Quartz scheduler version: 2.2.1
+JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@22479390
+[Peter Parker] loaded [], sites []
+Starting beans in phase 2147483647
+Starting Quartz Scheduler now
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED started.
+[Mentus] loaded [], sites []
+Could not instantiate TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener]. Specify custom listener classes or make the default listener classes (and their required dependencies) available. Offending class: [org/springframework/web/context/request/RequestAttributes]
+Loading XML bean definitions from URL [file:/data/workspace/JTestPro/target/classes/applicationContext.xml]
+Refreshing org.springframework.context.support.GenericApplicationContext@64d74895: startup date [Wed Oct 28 17:19:35 CST 2015]; root of context hierarchy
+Loading properties file from URL [file:/data/workspace/JTestPro/target/classes/ServerConfig.properties]
+JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+Loaded JDBC driver: com.mysql.jdbc.Driver
+Using default implementation for ThreadExecutor
+Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+Quartz Scheduler v.2.2.1 created.
+RAMJobStore initialized.
+Scheduler meta-data: Quartz Scheduler (v2.2.1) 'schedulerFactoryBean' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+Quartz scheduler 'schedulerFactoryBean' initialized from an externally provided properties instance.
+Quartz scheduler version: 2.2.1
+JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@53e7ec65
+[Bushmaster] loaded [], sites []
+Starting beans in phase 2147483647
+Starting Quartz Scheduler now
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED started.
+[Human Torch II] loaded [], sites []
+Closing org.springframework.context.support.GenericApplicationContext@64d74895: startup date [Wed Oct 28 17:19:35 CST 2015]; root of context hierarchy
+Stopping beans in phase 2147483647
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED paused.
+Shutting down Quartz Scheduler
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED shutting down.
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED paused.
+Scheduler schedulerFactoryBean_$_NON_CLUSTERED shutdown complete.
