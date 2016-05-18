@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by kelong on 7/10/14.
@@ -27,5 +29,19 @@ public class Test1 extends TestCase {
 
 
         System.out.println("UUID:"+ UUID.randomUUID().toString().replaceAll("-", ""));
+
+        System.out.println(isContainChinese("china123是"));
     }
+
+
+    public static boolean isContainChinese(String str) {
+
+        Pattern p = Pattern.compile("[\u4e00-\u9fa5]");
+        Matcher m = p.matcher(str);
+        if (m.find()) {
+            return true;
+        }
+        return false;
+    }
+
 }

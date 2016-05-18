@@ -1,35 +1,35 @@
-package com.zookeeper.curator;
+package com.zookeeper.curator.watch;
 
+import com.zookeeper.curator.ClientFactory;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.utils.CloseableUtils;
+import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.data.Stat;
 
 /**
  * @author kelong
- * @date 1/8/16
+ * @date 3/24/16
  */
-public class CrudExamples {
+public class WatcherTest {
     private static CuratorFramework client = ClientFactory.newClient();
-    private static final String PATH = "/crud";
+    private static final String PATH = "/chat";
 
     public static void main(String[] args) {
         try {
             client.start();
 
-            client.create().forPath(PATH, "I love messi".getBytes());
+//         client.create().forPath(PATH, "I love messi".getBytes());
 
-            byte[] bs = client.getData().forPath(PATH);
-            System.out.println("新建的节点，data为:" + new String(bs));
+            client.create().withMode(CreateMode.EPHEMERAL_SEQUENTIAL).forPath("/chat/chat4","chat4".getBytes());
 
-            client.setData().forPath(PATH, "I love football".getBytes());
+            //            byte[] bs = client.getData().forPath(PATH);
+//            System.out.println("新建的节点，data为:" + new String(bs));
 
-            // 由于是在background模式下获取的data，此时的bs可能为null
-            byte[] bs2 = client.getData().watched().inBackground().forPath(PATH);
-            System.out.println("修改后的data为" + new String(bs2 != null ? bs2 : new byte[0]));
+//            client.setData().forPath(PATH, "I love football".getBytes());
 
-            client.delete().forPath(PATH);
+//            client.delete().forPath(PATH);
             Stat stat = client.checkExists().forPath(PATH);
             // Stat就是对zonde所有属性的一个映射， stat=null表示节点不存在！
             System.out.println(stat);
@@ -38,12 +38,13 @@ public class CrudExamples {
             client.getChildren().usingWatcher(new Watcher() {
                 @Override
                 public void process(WatchedEvent event) {
+                    System.out.println(event.getPath());
+                    System.out.println(event.getType().getIntValue());
                     System.out.println("node is changed");
                 }
-            }).inBackground().forPath("/test");
+            }).inBackground().forPath(PATH);
 
-
-
+            Thread.sleep(Integer.MAX_VALUE);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -20,7 +20,16 @@
     </appender>
 
     <appender name="accessLog" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="api-access.log" />
+        <param name="File" value="access.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <param name="Encoding" value="UTF-8"></param>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{ABSOLUTE} - %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="errorLog" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="access-error.log" />
         <param name="DatePattern" value="'.'yyyy-MM-dd" />
         <param name="Encoding" value="UTF-8"></param>
         <layout class="org.apache.log4j.PatternLayout">
@@ -31,9 +40,16 @@
     <logger name="access" additivity="false">
         <level value="info" />
         <appender-ref ref="accessLog" />
-        <appender-ref ref="appLog" />
+        <!--<appender-ref ref="appLog" />-->
         <appender-ref ref="console" />
     </logger>
+
+    <logger name="error" additivity="false">
+        <level value="info" />
+        <appender-ref ref="errorLog" />
+        <appender-ref ref="console" />
+    </logger>
+
 
     <category name="com" additivity="false">
         <level value="debug"></level>
