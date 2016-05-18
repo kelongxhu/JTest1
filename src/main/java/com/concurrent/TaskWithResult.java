@@ -1,0 +1,22 @@
+package com.concurrent;
+
+import java.util.concurrent.Callable;
+
+/**
+ * @author kelong
+ * @date 6/11/15
+ */
+public class TaskWithResult implements Callable<String> {
+    private int id;
+
+    public TaskWithResult(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String call() throws Exception {
+        Thread.sleep(id*1000);
+        System.out.println("result of TaskWithResult "+id);
+        return "result of TaskWithResult " + id;
+    }
+}
