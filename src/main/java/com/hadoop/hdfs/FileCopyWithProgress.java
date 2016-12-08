@@ -18,7 +18,7 @@ import java.net.URI;
 public class FileCopyWithProgress {
     public static void main(String[] args) throws Exception {
         String localSrc = "/data/hadoop/data/file_in/file1.txt";
-        String dst = "hdfs://192.168.56.99:9000/input2/copy.txt";
+        String dst = "hdfs://192.168.56.99:9000/input2/copy_file1.txt";
 
         InputStream in = new BufferedInputStream(new FileInputStream(localSrc));
 
@@ -31,5 +31,7 @@ public class FileCopyWithProgress {
         });
 
         IOUtils.copyBytes(in, out, 4096, true);
+
+        System.out.println("copy success.");
     }
 }
