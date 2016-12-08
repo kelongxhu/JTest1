@@ -1,4 +1,4 @@
-package com.concurent;
+package com.concurrent;
 import java.util.concurrent.*;
 
 public class MyExecutor extends Thread {
