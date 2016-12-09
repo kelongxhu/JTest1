@@ -9,5 +9,6 @@ classes
 *target
 *test-output
 .idea/
+Log/
 webapp/src/main/webapp/node_modules/
 mobile/src/main/webapp/node_modules/
