@@ -35,6 +35,7 @@ public class FileSink extends AbstractSink implements Configurable {
      * timing out the operation. Intended to prevent server hangs.
      */
     private long txnEventMax ;
+    //存储当前写入的文件
     private FileWriterLinkedHashMap sfWriters ;
     private String serializerType ;
     private Context serializerContext ;

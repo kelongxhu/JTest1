@@ -45,9 +45,12 @@ public class BucketFileWriter {
                      final ScheduledExecutorService timedRollerPool,
                      final FileWriterLinkedHashMap sfWriters) throws IOException {
         this.filePath = filePath;
-        File file = new File(filePath + IN_USE_EXT);
-        file.getParentFile().mkdirs();
-        outputStream = new BufferedOutputStream(new FileOutputStream(file));
+        File file = new File(filePath);
+        File parent=file.getParentFile();
+        if (!parent.exists()){
+            parent.mkdirs();
+        }
+        outputStream = new BufferedOutputStream(new FileOutputStream(file,true));
         logger.info("filename = " + file.getAbsolutePath());
         serializer = EventSerializerFactory.getInstance(serializerType,
             serializerContext, outputStream);
@@ -83,6 +86,8 @@ public class BucketFileWriter {
      * Rename bucketPath file from .tmp to permanent location.
      */
     private void renameBucket() {
+        //增量append
+
         File srcPath = new File(filePath + IN_USE_EXT);
         File dstPath = new File(filePath);
         if (srcPath.exists()) {
@@ -96,6 +101,6 @@ public class BucketFileWriter {
             outputStream.flush();
             outputStream.close();
         }
-        renameBucket();
+        //renameBucket();
     }
 }

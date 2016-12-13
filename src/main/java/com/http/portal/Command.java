@@ -9,10 +9,10 @@ import java.io.InputStreamReader;
  * @date 5/11/16 1:13 PM
  */
 public class Command {
-    public static final String CMD = "curl -I www.alcatel-mobile.com";
-    public static final String CMD1 = "curl -I www1.alcatel-mobile.com";
-    public static final String CMD2 = "curl -I www.alcatel-mobile.com/hk/";
-    public static final String CMD3 = "curl -I www1.alcatel-mobile.com/hk/";
+    public static final String CMD = "curl -I www.baidu.com";
+    public static final String CMD1 = "curl -I www1.baidu.com";
+    public static final String CMD2 = "curl -I www.baidu.com/hk/";
+    public static final String CMD3 = "curl -I www1.baidu.com/hk/";
 
     public ReqHeader execue(String cmd) throws Exception {
         Process process = Runtime.getRuntime().exec(
