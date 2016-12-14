@@ -21,10 +21,10 @@
                   value="com.mysql.jdbc.Driver">
         </property>
         <property name="url"
-                  value="jdbc:mysql://172.26.50.17:3306/wristband">
+                  value="jdbc:mysql://127.0.0.1:3306/wristband">
         </property>
-        <property name="username" value="tcloud"></property>
-        <property name="password" value="duolct123"></property>
+        <property name="username" value=""></property>
+        <property name="password" value=""></property>
     </bean>
 
     <bean id="jdbcTemplate"
