@@ -18,7 +18,6 @@ public class BeanDefineConfigue  implements ApplicationListener<ContextRefreshed
     /**
      * 当一个ApplicationContext被初始化或刷新触发
      */
-    @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         list.add("aa");
         System.out.println(list.size());
