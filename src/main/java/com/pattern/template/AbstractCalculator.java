@@ -1,6 +1,7 @@
 package com.pattern.template;
 
 /**
+ * 抽象
  * @author codethink
  * @date 12/20/16 2:44 PM
  */

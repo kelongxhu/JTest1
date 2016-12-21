@@ -30,4 +30,9 @@ public class AmoebaDaoTest {
             amoebaDao.amoebaInsertTest();
         }
     }
+
+    @Test
+    public void test2(){
+        System.out.println("sssss");
+    }
 }

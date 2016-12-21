@@ -16,7 +16,6 @@ public class DesCoderTest {
         //       System.out.println(DateUtil.fomartTimeMillisToStr("yyyyMMddHHmmsss",1402128000*1000l));
 
         new Thread(new Runnable() {
-            @Override
             public void run() {
                 while (!isStop) {
                     try {

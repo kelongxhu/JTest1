@@ -5,6 +5,8 @@ public class ServiceException extends RuntimeException {
 
     private int code;
 
+    private String message;
+
     public ServiceException(String message) {
         super(message);
     }
@@ -13,6 +15,12 @@ public class ServiceException extends RuntimeException {
         super(message);
         this.code = code;
     }
+
+    public ServiceException(String message, Throwable e) {
+        super(message, e);
+        this.message = message;
+    }
+
 
     public ServiceException(int code, String message, Throwable cause) {
         super(message, cause);
@@ -23,7 +31,12 @@ public class ServiceException extends RuntimeException {
         return code;
     }
 
-    public ServiceException(int code){
+    public ServiceException(int code) {
         this.code = code;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
     }
 }

@@ -34,9 +34,7 @@
             <ref bean="springDSN" />
         </property>
     </bean>
-
-    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
-
     <import resource="applicationContext-mongo.xml"/>
+    <import resource="spring-scheduler.xml"/>
 
 </beans>
