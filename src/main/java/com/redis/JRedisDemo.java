@@ -17,7 +17,11 @@ import java.util.Set;
 public class JRedisDemo {
 
     public void test2(){
-        Jedis redis = new Jedis("172.26.35.130",6379);//连接redis
+        Jedis redis = new Jedis("127.0.0.1",6379);//连接redis
+
+        System.out.println(redis.setnx("xxx","xxxx"));
+        System.out.println(redis.setnx("xxx","xxxx"));
+
 //        redis.lpush("sort2", "1");
 //        redis.lpush("sort2", "4");
 //        redis.lpush("sort2", "6");
@@ -39,6 +43,10 @@ public class JRedisDemo {
     
     public void test1(){     
         Jedis redis = new Jedis("172.26.35.130",6379);//连接redis
+
+
+
+
 
         //redis.auth("redis");//验证密码    iiiiiii
         /* -----------------------------------------------------------------------------------------------------------  */           

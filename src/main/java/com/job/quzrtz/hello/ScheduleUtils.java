@@ -1,4 +1,4 @@
-package com.quzrtz.hello;
+package com.job.quzrtz.hello;
 
 import com.exception.ServiceException;
 import org.quartz.*;

@@ -23,7 +23,7 @@ public class KafkaConsumer {
     private KafkaConsumer() {
         Properties props = new Properties();
         //zookeeper 配置
-        props.put("zookeeper.connect", "172.26.50.24:2181");
+        props.put("zookeeper.connect", "localhost:2181");
 
         //group 代表一个消费组
         props.put("group.id", "jd-group-4");
@@ -42,6 +42,8 @@ public class KafkaConsumer {
     }
 
     void consume() {
+
+        //一次从主题中获取一个数据
         Map<String, Integer> topicCountMap = new HashMap<String, Integer>();
         topicCountMap.put(KafkaProducer.TOPIC, new Integer(1));
 

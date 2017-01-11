@@ -1,4 +1,4 @@
-package com.quzrtz.hello;
+package com.job.quzrtz.hello;
 
 /**
  * @author codethink

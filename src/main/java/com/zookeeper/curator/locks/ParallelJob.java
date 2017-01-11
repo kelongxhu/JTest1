@@ -24,7 +24,6 @@ public class ParallelJob implements Runnable {
 		this.lock = lock;
 	}
 
-	@Override
 	public void run() {
 		try {
 			doWork();

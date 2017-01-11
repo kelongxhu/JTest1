@@ -1,5 +1,5 @@
-import com.quzrtz.hello.ScheduleJobEntity;
-import com.quzrtz.hello.ScheduleUtils;
+import com.job.quzrtz.hello.ScheduleJobEntity;
+import com.job.quzrtz.hello.ScheduleUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.quartz.Scheduler;

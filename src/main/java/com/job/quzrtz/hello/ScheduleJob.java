@@ -1,4 +1,4 @@
-package com.quzrtz.hello;
+package com.job.quzrtz.hello;
 
 import com.util.SpringContextUtils;
 import org.apache.commons.lang.StringUtils;

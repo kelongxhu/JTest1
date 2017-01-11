@@ -34,7 +34,10 @@
             <ref bean="springDSN" />
         </property>
     </bean>
+
     <import resource="applicationContext-mongo.xml"/>
     <import resource="spring-scheduler.xml"/>
+    <import resource="applicationContext-redis.xml"/>
+    <import resource="applicationContext-elastic-job.xml"/>
 
 </beans>

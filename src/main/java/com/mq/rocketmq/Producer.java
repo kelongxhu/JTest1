@@ -11,7 +11,7 @@ import com.alibaba.rocketmq.common.message.Message;
 public class Producer {
     public static void main(String[] args){
         DefaultMQProducer producer = new DefaultMQProducer("Producer");
-        producer.setNamesrvAddr("172.26.50.24:9876");
+        producer.setNamesrvAddr("10.115.101.84:9876");
         try {
             producer.start();
 

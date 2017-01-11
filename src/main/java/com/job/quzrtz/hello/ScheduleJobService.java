@@ -1,4 +1,4 @@
-package com.quzrtz.hello;
+package com.job.quzrtz.hello;
 
 /**
  * 定时任务

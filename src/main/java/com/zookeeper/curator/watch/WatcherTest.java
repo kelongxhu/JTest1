@@ -36,7 +36,6 @@ public class WatcherTest {
 
 
             client.getChildren().usingWatcher(new Watcher() {
-                @Override
                 public void process(WatchedEvent event) {
                     System.out.println(event.getPath());
                     System.out.println(event.getType().getIntValue());

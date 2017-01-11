@@ -36,7 +36,6 @@ public class CrudExamples {
 
 
             client.getChildren().usingWatcher(new Watcher() {
-                @Override
                 public void process(WatchedEvent event) {
                     System.out.println("node is changed");
                 }

@@ -24,7 +24,6 @@ public class MutexJob implements Runnable {
 		this.lock = lock;
 	}
 
-	@Override
 	public void run() {
 		try {
 			doWork();

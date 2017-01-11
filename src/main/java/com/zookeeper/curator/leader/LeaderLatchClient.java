@@ -23,12 +23,10 @@ public class LeaderLatchClient implements Closeable {
 		leaderLatch = new LeaderLatch(client, PATH);
 
 		LeaderLatchListener latchListener = new LeaderLatchListener() {
-			@Override
 			public void isLeader() {
 				System.out.println("I am leader, my name is " + name);
 			}
 
-			@Override
 			public void notLeader() {
 				System.out.println("I release my leader ship, my name is " + name);
 			}
@@ -42,7 +40,6 @@ public class LeaderLatchClient implements Closeable {
 		leaderLatch.start();
 	}
 
-	@Override
 	public void close() throws IOException {
 		leaderLatch.close();
 	}

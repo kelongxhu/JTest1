@@ -28,7 +28,6 @@ public class LeaderSelectorClient extends LeaderSelectorListenerAdapter implemen
 		leaderSelector.start();
 	}
 
-	@Override
 	public void close() throws IOException {
 		leaderSelector.close();
 	}
@@ -48,10 +47,9 @@ public class LeaderSelectorClient extends LeaderSelectorListenerAdapter implemen
 	/**
 	 * client成为leader后，会调用此方法
 	 */
-	@Override
 	public void takeLeadership(CuratorFramework client) throws Exception {
 
-		int waitSeconds = (int) (5 * Math.random()) + 1;
+		int waitSeconds = (int) (50000 * Math.random()) + 1;
 		System.out.println(name + "是当前的leader");
 		try {
 			Thread.sleep(TimeUnit.SECONDS.toMillis(waitSeconds));

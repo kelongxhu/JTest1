@@ -12,8 +12,7 @@ public class KafkaProducer
     private KafkaProducer(){
         Properties props = new Properties();
         //此处配置的是kafka的端口
-        props.put("metadata.broker.list", "localhost:9092,172.26.50.65:9092");
-
+        props.put("metadata.broker.list", "localhost:9092");
         //配置value的序列化类
         props.put("serializer.class", "kafka.serializer.StringEncoder");
         //配置key的序列化类
@@ -30,7 +29,7 @@ public class KafkaProducer
 
     void produce() {
         int messageNo = 1000;
-        final int COUNT = 10000;
+        final int COUNT = 1001;
 
         while (messageNo < COUNT) {
             String key = String.valueOf(messageNo);

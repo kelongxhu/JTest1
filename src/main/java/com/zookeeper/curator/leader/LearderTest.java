@@ -31,7 +31,6 @@ public class LearderTest {
 
         new LeaderSelector(client, MASTER_PATH, new LeaderSelectorListenerAdapter() {
 
-            @Override
             public void takeLeadership(CuratorFramework client) throws Exception {
                System.out.println("本机被选择为了Leader，获取执行任务权限."+name);
                Thread.sleep(1000*5);
