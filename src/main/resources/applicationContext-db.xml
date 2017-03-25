@@ -45,7 +45,7 @@
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.wlqq.openapi.oauth.dao"/>
+        <property name="basePackage" value="com.dao.entity"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
