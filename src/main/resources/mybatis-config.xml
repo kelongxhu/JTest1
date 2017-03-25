@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"org/apache/ibatis/builder/xml/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+		<setting name="cacheEnabled" value="false" />
+	</settings>
+	<plugins>
+		<plugin interceptor="com.dao.mybatis.PageInterceptor">
+			<property name="databaseType" value="mysql"/>
+		</plugin>
+	</plugins>
+</configuration>
