@@ -3,14 +3,15 @@ package com.dao.mybatis;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
-import org.apache.ibatis.plugin.Interceptor;
-import org.apache.ibatis.plugin.Intercepts;
-import org.apache.ibatis.plugin.Invocation;
-import org.apache.ibatis.plugin.Signature;
+import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.factory.DefaultObjectFactory;
 import org.apache.ibatis.reflection.factory.ObjectFactory;
+import org.apache.ibatis.reflection.wrapper.DefaultObjectWrapperFactory;
 import org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory;
+
+import java.sql.Connection;
+import java.util.Properties;
 
 @Intercepts({ @Signature(type = StatementHandler.class, method = "prepare", args = { Connection.class }) })
 public class TableSegInterceptor implements Interceptor {
@@ -21,9 +22,11 @@ public class TableSegInterceptor implements Interceptor {
     public Object intercept(Invocation invocation) throws Throwable {
         StatementHandler statementHandler = (StatementHandler) invocation
                 .getTarget();
-        MetaObject metaStatementHandler = MetaObject.forObject(
-                statementHandler, DEFAULT_OBJECT_FACTORY,
-                DEFAULT_OBJECT_WRAPPER_FACTORY);
+        MetaObject metaStatementHandler=null;
+
+//        MetaObject metaStatementHandler = MetaObject.forObject(
+//                statementHandler, DEFAULT_OBJECT_FACTORY,
+//                DEFAULT_OBJECT_WRAPPER_FACTORY);
         String originalSql = (String) metaStatementHandler
                 .getValue("delegate.boundSql.sql");
         BoundSql boundSql = (BoundSql) metaStatementHandler
@@ -41,12 +44,12 @@ public class TableSegInterceptor implements Interceptor {
             //根据配置自动生成分表SQL
             TableSeg tableSeg = classObj.getAnnotation(TableSeg.class);
             if (tableSeg != null) {
-                AnalyzeActualSql as = new AnalyzeActualSqlImpl(mappedStatement, parameterObject, boundSql);
-                String newSql = as.getActualSql(originalSql, tableSeg);
-                if (newSql != null) {
-                    LogUtil.d(tag, "分表后SQL =====>" + newSql);
-                    metaStatementHandler.setValue("delegate.boundSql.sql", newSql);
-                }
+//                AnalyzeActualSql as = new AnalyzeActualSqlImpl(mappedStatement, parameterObject, boundSql);
+//                String newSql = as.getActualSql(originalSql, tableSeg);
+//                if (newSql != null) {
+//                    LogUtil.d(tag, "分表后SQL =====>" + newSql);
+//                    metaStatementHandler.setValue("delegate.boundSql.sql", newSql);
+//                }
             }
         }
         // 传递给下一个拦截器处理
