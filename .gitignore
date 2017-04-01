@@ -10,5 +10,6 @@ classes
 *test-output
 .idea/
 Log/
+*.log
 webapp/src/main/webapp/node_modules/
 mobile/src/main/webapp/node_modules/
