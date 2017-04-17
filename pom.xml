@@ -519,7 +519,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.http.portal.Task</mainClass>
+                            <mainClass>com.util.http.portal.Task</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

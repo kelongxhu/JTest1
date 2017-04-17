@@ -1,6 +1,6 @@
 package com.job.quzrtz.hello;
 
-import com.basic.exception.ServiceException;
+import com.core.exception.ServiceException;
 import com.util.SpringContextUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.ReflectionUtils;

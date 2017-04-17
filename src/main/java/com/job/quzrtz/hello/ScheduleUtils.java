@@ -1,6 +1,6 @@
 package com.job.quzrtz.hello;
 
-import com.basic.exception.ServiceException;
+import com.core.exception.ServiceException;
 import org.quartz.*;
 import org.quartz.impl.matchers.GroupMatcher;
 import org.slf4j.Logger;
