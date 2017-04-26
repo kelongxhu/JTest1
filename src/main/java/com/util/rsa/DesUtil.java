@@ -16,7 +16,7 @@ public class DesUtil {
   private final static String DES = "DES";
 
   public static void main(String[] args) throws Exception {
-    String data = "123 456";
+    String data = "123456ddddddddddddddddddddddddddddddddddxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
     String key = "wang!@#$%";
     System.err.println(encrypt(data, key));
     System.err.println(decrypt(encrypt(data, key), key));
