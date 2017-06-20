@@ -24,7 +24,7 @@ public class HelloWorldCommand2 extends HystrixCommand<String> {
     }
     @Override
     protected String run() throws Exception {
-        //sleep 1 秒,调用会超时
+        //sleep 1 秒,调用会超时，强制打断，抛出异常
         TimeUnit.MILLISECONDS.sleep(1000);
         return "Hello " + name +" thread:" + Thread.currentThread().getName();
     }

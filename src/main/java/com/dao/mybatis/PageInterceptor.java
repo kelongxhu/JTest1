@@ -201,6 +201,38 @@ public class PageInterceptor implements Interceptor {
     return "select count(*) " + sql.substring(index);
   }
 
+
+  /**
+   * 获取COUNT的优化SQL
+   * @param originalSql
+   * @return
+   */
+  public static String getCountOptimizeSql(String originalSql) {
+    String tempSql = originalSql.replaceAll("(?i)ORDER[\\s]+BY", "ORDER BY");
+    String indexOfSql = tempSql.toUpperCase();
+    int orderByIndex = indexOfSql.lastIndexOf("ORDER BY");
+    StringBuilder countSql = new StringBuilder("SELECT COUNT(1) ");
+    //去除查询字段,ORDER BY
+    if (!indexOfSql.contains("DISTINCT") && !indexOfSql.contains("GROUP BY")) {
+      int formIndex = indexOfSql.indexOf("FROM");
+      if (formIndex > -1) {
+        if (orderByIndex > -1) {
+          tempSql = tempSql.substring(0, orderByIndex);
+          countSql.append(tempSql.substring(formIndex));
+        } else {
+          countSql.append(tempSql.substring(formIndex));
+        }
+      }
+    } else {
+      //DISTINCT,GROUP BY只去除ORDER BY
+      if (orderByIndex > -1) {
+        tempSql = tempSql.substring(0, orderByIndex);
+      }
+      countSql.append("FROM ( ").append(tempSql).append(" ) TOTAL");
+    }
+    return countSql.toString();
+  }
+
   /**
    * 利用反射进行操作的一个工具类
    *
