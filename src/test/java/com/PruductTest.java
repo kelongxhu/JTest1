@@ -1,3 +1,5 @@
+package com;
+
 import com.util.HbaseHelper;
 import com.util.StringUtils;
 import org.junit.Test;

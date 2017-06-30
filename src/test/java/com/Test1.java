@@ -1,3 +1,5 @@
+package com;
+
 import com.redis.A;
 import org.junit.Before;
 import org.junit.Test;

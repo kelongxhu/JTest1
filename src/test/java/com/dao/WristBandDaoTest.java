@@ -1,4 +1,7 @@
+package com.dao;
+
 import com.dao.AmoebaDao;
+import com.dao.WristBandDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -12,27 +15,13 @@ import javax.annotation.Resource;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath*:applicationContext.xml")
-public class AmoebaDaoTest {
+public class WristBandDaoTest {
 
     @Resource
-    private AmoebaDao amoebaDao;
+    private WristBandDao wristBandDao;
 
     @Test
     public void test() {
-        for (int i = 0; i < 10; i++) {
-            amoebaDao.amoebaTest();
-        }
-    }
-
-    @Test
-    public void insert() {
-        for (int i = 0; i < 2; i++) {
-            amoebaDao.amoebaInsertTest();
-        }
-    }
-
-    @Test
-    public void test2(){
-        System.out.println("sssss");
+        wristBandDao.put();
     }
 }

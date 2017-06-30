@@ -1,3 +1,5 @@
+package com;
+
 import com.job.quzrtz.hello.ScheduleJobEntity;
 import com.job.quzrtz.hello.ScheduleUtils;
 import org.junit.Test;

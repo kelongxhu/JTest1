@@ -1,104 +1,135 @@
 package com.redis.lock;
 
-import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import redis.clients.jedis.Jedis;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-import java.util.Random;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
 /**
- * @author codethink
- * @date 12/27/16 2:41 PM
+ * @author kelong
+ * @since 2017/5/19 14:12
  */
-
 public class RedisLock implements Lock {
 
-    private static final Logger logger = LoggerFactory.getLogger(RedisLock.class);
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    // lock flag stored in redis
-    private static final String LOCKED = "TRUE";
+    private RedisTemplate<String, String> valueTemplate;
 
-    // timeout(ms)
-    private static final long TIME_OUT = 300000;
-
-    // lock expire time(s)
-    public static final int EXPIRE = 60000;
-
-    private Jedis jedis;
-
-    private String key;
+    private static final String LOCKED_VALUE = "TRUE";
+    //10s
+    private static final long   TIME_OUT     = 1000L * 5;
+    //失效时间(机器时间差)
+    private static final int    EXPIRE       = 60 * 2;
+    //循环获取间隔,5秒
+    private static final long   INTERVAL     = 1000L * 5;
+    //lock key
+    private String lockKey;
 
     // state flag
     private volatile boolean locked = false;
 
-
-    private static ConcurrentMap<String, RedisLock> map = Maps.newConcurrentMap();
-
-
-    public RedisLock(String key) {
-        this.key = "lock_" + key;
-        jedis = new Jedis("127.0.0.1", 6379);
+    public RedisLock(RedisTemplate<String, String> valueTemplate, String lockKey) {
+        this.valueTemplate = valueTemplate;
+        this.lockKey = lockKey;
     }
 
-    public static RedisLock getInstance(String key) {
-        if (map.get(key) == null) {
-            map.put(key, new RedisLock(key));
-        }
-        return map.get(key);
-    }
-
-    public void lock(long timeout) {
+    /**
+     * 获取锁
+     *
+     * @param timeout
+     */
+    private void lock(long timeout) {
+        //纳秒
         long nano = System.nanoTime();
-        final Random r = new Random();
+        timeout *= 1000000;
+        int loopNum = 0;
         try {
-            long time=System.nanoTime() - nano;
-            timeout*=1000000;//转换为拉秒
-            while (time < timeout) {
-                long value = jedis.setnx(key, LOCKED);
-                if (value == 1) {
-                    jedis.expire(key, EXPIRE);
+            while ((System.nanoTime() - nano) < timeout) {
+                if (setNX(lockKey, LOCKED_VALUE)) {
+                    // TODO 假设setNx之后，Redis崩了, 恢复后的redis这里会产生死锁, 该锁永远不会超时
+                    valueTemplate.expire(lockKey, EXPIRE, TimeUnit.SECONDS);
                     locked = true;
-                    logger.info("add RedisLock[" + key + "].");
+                    logger.info("Get lock success:{},expire:{}", lockKey, EXPIRE);
                     break;
+                } else {
+                    loopNum++;
+                    logger.info("Loop get lock,{}", loopNum);
                 }
-                Thread.sleep(3, r.nextInt(500));
+                //timeout
+                Thread.sleep(INTERVAL);
             }
         } catch (Exception e) {
+            logger.error(e.getMessage(), e);
         }
     }
 
-    public void unlock() {
-        if (locked) {
-            logger.info("release RedisLock[" + key + "].");
-            jedis.del(key);
-        } else {
-            logger.info("not get RedisLock");
+    /**
+     * setNX
+     *
+     * @param key
+     * @param value
+     * @return
+     */
+    private boolean setNX(final String key, final String value) {
+        Object obj = null;
+        try {
+            obj = valueTemplate.execute(new RedisCallback<Object>() {
+                @Override
+                public Object doInRedis(RedisConnection connection) throws DataAccessException {
+                    StringRedisSerializer serializer = new StringRedisSerializer();
+                    Boolean success = connection.setNX(serializer.serialize(key), serializer.serialize(value));
+                    connection.close();
+                    return success;
+                }
+            });
+        } catch (Exception e) {
+            logger.error("setNX redis error, key : {}", key);
         }
+        return obj != null ? (Boolean) obj : false;
     }
 
+    @Override
     public void lock() {
-        lock(TIME_OUT);
+        if (logger.isDebugEnabled()) {
+            logger.debug("lock..");
+        }
     }
 
+    @Override
     public void lockInterruptibly() throws InterruptedException {
-
+        if (logger.isDebugEnabled()) {
+            logger.debug("lock interrupt..");
+        }
     }
 
-    public Condition newCondition() {
-        return null;
-    }
-
+    @Override
     public boolean tryLock() {
-        return false;
+        lock(TIME_OUT);
+        return locked;
     }
 
+    @Override
     public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
         return false;
     }
-}
 
+    @Override
+    public void unlock() {
+        if (locked) {
+            valueTemplate.delete(lockKey);
+            locked = false;
+        }
+    }
+
+    @Override
+    public Condition newCondition() {
+        return null;
+    }
+}

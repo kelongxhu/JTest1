@@ -1,3 +1,5 @@
+package com;
+
 import net.kencochrane.raven.Dsn;
 import net.kencochrane.raven.Raven;
 import net.kencochrane.raven.RavenFactory;
