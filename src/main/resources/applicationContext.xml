@@ -40,8 +40,9 @@
 
     <!--<import resource="applicationContext-mongo.xml"/>-->
     <!--<import resource="spring-scheduler.xml"/>-->
-    <import resource="applicationContext-redis.xml"/>
+    <!--<import resource="applicationContext-redis.xml"/>-->
     <!--<import resource="applicationContext-elastic-job.xml"/>-->
     <!--<import resource="applicationContext-db.xml"/>-->
-
+    <!--<import resource="applicationContext-rabbitmq.xml"/>-->
+    <import resource="applicationContext-rabbitmq-consumer.xml"/>
 </beans>
