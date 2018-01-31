@@ -9,6 +9,7 @@ import org.springframework.amqp.core.MessageListener;
  * @since 2017/7/11 14:07
  */
 public class RabbitmqService implements MessageListener {
+    @Override
     public void onMessage(Message message) {
         System.out.println("消息消费者 = " + JSON.toJSONString(message));
     }

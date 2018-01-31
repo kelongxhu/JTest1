@@ -10,22 +10,32 @@
                         http://www.dangdang.com/schema/ddframe/job
                         http://www.dangdang.com/schema/ddframe/job/job.xsd
                         ">
-    <!--configure registry center -->
-    <reg:zookeeper id="regCenter" server-lists="localhost:2181" namespace="dd-job" base-sleep-time-milliseconds="1000" max-sleep-time-milliseconds="3000" max-retries="3" />
+    <!--配置作业注册中心 -->
+    <reg:zookeeper id="regCenter" server-lists="192.168.56.101:2181" namespace="dd-job" base-sleep-time-milliseconds="1000" max-sleep-time-milliseconds="3000" max-retries="3" />
 
-    <!--configure job -->
-    <!--<job:simple id="myElasticJob" class="com.job.elastic.MyElasticJob" registry-center-ref="regCenter" cron="0/10 * * * * ?"   sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C" />-->
+    <!-- 配置简单作业-->
+    <job:simple id="simpleElasticJob" monitor-port="9888" class="com.job.elastic.MyElasticJob" registry-center-ref="regCenter" cron="0/10 * * * * ?" sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C" />
 
-    <!-- 配置数据流作业-->
-    <job:dataflow id="throughputDataFlow" class="com.job.elastic.ThroughputDataFlowElasticJob" registry-center-ref="regCenter" cron="0/10 * * * * ?" sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C" process-count-interval-seconds="10" concurrent-data-process-thread-count="10" />
+    <!--<bean id="yourRefJobBeanId" class="xxx.MySimpleRefElasticJob">-->
+        <!--<property name="fooService" ref="xxx.FooService"/>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 配置关联Bean作业&ndash;&gt;-->
+    <!--<job:simple id="simpleRefElasticJob" job-ref="yourRefJobBeanId" registry-center-ref="regCenter" cron="0/10 * * * * ?" sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C" />-->
+
+    <!--&lt;!&ndash; 配置数据流作业&ndash;&gt;-->
+    <!--<job:dataflow id="throughputDataflow" class="xxx.MyThroughputDataflowElasticJob" registry-center-ref="regCenter" cron="0/10 * * * * ?" sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C" />-->
 
     <!--&lt;!&ndash; 配置脚本作业&ndash;&gt;-->
     <!--<job:script id="scriptElasticJob" registry-center-ref="regCenter" cron="0/10 * * * * ?" sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C" script-command-line="/your/file/path/demo.sh" />-->
 
-    <!-- 配置带监听的简单作业-->
-    <job:simple id="listenerElasticJob" class="com.job.elastic.MyElasticJob" registry-center-ref="regCenter" cron="0/10 * * * * ?"   sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C">
-        <job:listener class="com.job.elastic.MyElasticJobListener"/>
-        <!--<job:listener class="xx.MyOnceSimpleJobListener" started-timeout-milliseconds="1000" completed-timeout-milliseconds="2000" />-->
-    </job:simple>
+    <!--&lt;!&ndash; 配置带监听的简单作业&ndash;&gt;-->
+    <!--<job:simple id="listenerElasticJob" class="xxx.MySimpleListenerElasticJob" registry-center-ref="regCenter" cron="0/10 * * * * ?" sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C">-->
+        <!--<job:listener class="xx.MySimpleJobListener"/>-->
+        <!--<job:distributed-listener class="xx.MyOnceSimpleJobListener" started-timeout-milliseconds="1000" completed-timeout-milliseconds="2000" />-->
+    <!--</job:simple>-->
 
+    <!--&lt;!&ndash; 配置带作业数据库事件追踪的简单作业&ndash;&gt;-->
+    <!--<job:simple id="eventTraceElasticJob" class="xxx.MySimpleListenerElasticJob" registry-center-ref="regCenter" cron="0/10 * * * * ?" sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C" event-trace-rdb-data-source="yourDataSource">-->
+    <!--</job:simple>-->
 </beans>

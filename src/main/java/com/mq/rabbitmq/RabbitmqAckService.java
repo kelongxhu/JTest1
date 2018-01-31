@@ -12,6 +12,7 @@ import org.springframework.amqp.rabbit.core.ChannelAwareMessageListener;
  */
 public class RabbitmqAckService implements ChannelAwareMessageListener {
 
+    @Override
     public void onMessage(Message message, Channel channel) throws Exception {
         System.out.println("消息消费者 = " + JSON.toJSONString(message));
         Thread.sleep(2000);
