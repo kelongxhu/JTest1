@@ -3,13 +3,16 @@ package com;
 import com.alibaba.fastjson.JSON;
 import com.dao.entity.User;
 import com.dao.entity.User2;
+import com.google.common.base.Stopwatch;
 import com.redis.A;
 import com.util.BeanCopierUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
 
+import java.util.Arrays;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -95,6 +98,52 @@ public class Test1 {
         System.out.println("costs:" + (System.currentTimeMillis() - start));
         //System.out.println(JSON.toJSONString(user));
         //System.out.println(JSON.toJSONString(user2));
+        System.out.println(1001/1000);
+        //0-999
+        //1000-1999
+        //2000-2500
+
+    }
+
+    @Test
+    public void testStopwatch(){
+        Stopwatch stopwatch = Stopwatch.createUnstarted();
+        // 开始计量时间
+        stopwatch.start();
+
+        try {
+            TimeUnit.SECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        // 停止计量时间
+        stopwatch.stop();
+        // 根据输入时间单位获取相应的时间
+        System.out.println(stopwatch.elapsed(TimeUnit.SECONDS));
+
+    }
+
+    @Test
+    public void test2(){
+        char c = 'x';
+        System.out.println(true?120:c);
+        //case2
+        int[] arr = new int[]{1,2,3};
+        boolean flag = Arrays.asList(arr).contains(1);
+        System.out.println(flag);
+        System.out.println(Arrays.asList(arr).size());
+        //case3
+        System.out.println(isOdd(0));
+        //case
+        boolean flag2 = Boolean.getBoolean("true");
+        System.out.println(flag2);
+        System.out.println(Boolean.parseBoolean("true"));
+
+
+    }
+
+    public static boolean isOdd(int i){
+        return i%2 == 1;
     }
 
 }

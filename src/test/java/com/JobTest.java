@@ -1,7 +1,7 @@
 package com;
 
-import com.job.quzrtz.hello.ScheduleJobEntity;
-import com.job.quzrtz.hello.ScheduleUtils;
+import com.module.job.quzrtz.hello.ScheduleJobEntity;
+import com.module.job.quzrtz.hello.ScheduleUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.quartz.Scheduler;

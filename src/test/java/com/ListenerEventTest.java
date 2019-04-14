@@ -12,7 +12,7 @@ public class ListenerEventTest {
                 "applicationContext.xml");
 //        BeanDefineConfigue beanDefineConfigue = (BeanDefineConfigue)context.getBean("testListener");
         //在ApplicationContext中发布一个 ApplicationEvent
-//        context.publishEvent(beanDefineConfigue);
+        //context.publishEvent(beanDefineConfigue);
 //        context.
         
     }

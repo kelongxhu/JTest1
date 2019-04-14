@@ -1,15 +1,10 @@
 package com.dao;
 
-import com.alibaba.fastjson.JSON;
-import com.util.DateUtil;
-import com.util.HbaseHelper;
-import com.util.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,14 +22,14 @@ public class WristBandDao {
 
     public void put() {
         try {
-            this.LOG.info("start...");
+            LOG.info("start...");
             String countSql = "select count(1) from activity where end_time<>0 and start_time<>0";
-            int count = this.jdbcTemplate.queryForInt(countSql);
+            int count = this.jdbcTemplate.queryForObject(countSql,Integer.class);
             Executor service = Executors.newFixedThreadPool(4);
             long start = System.currentTimeMillis();
             int pageSize = 10000;
             int size = count / pageSize;
-            this.LOG.info("split size:" + size);
+            LOG.info("split size:" + size);
             for (int j = 0; j < size + 1; j++) {
                 int startCount = j * pageSize;
                 String sql =
@@ -46,7 +41,7 @@ public class WristBandDao {
                 service.execute(new Task(activityMap, startCount));
             }
             long end = System.currentTimeMillis();
-            this.LOG.info("END," + (end - start) / 1000L);
+            LOG.info("END," + (end - start) / 1000L);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,6 +59,7 @@ public class WristBandDao {
             this.start = start;
         }
 
+        @Override
         public void run() {
             try {
 //                long time = putActivitys(maps);

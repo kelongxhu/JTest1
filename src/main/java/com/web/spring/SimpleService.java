@@ -15,6 +15,7 @@ public class SimpleService {
 
     public Object someServiceMethod() {
         return transactionTemplate.execute(new TransactionCallback() {
+            @Override
             public Object doInTransaction(TransactionStatus status) {
                 Object object = new Object();
                 System.out.println();

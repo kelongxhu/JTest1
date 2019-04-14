@@ -14,7 +14,7 @@
     <reg:zookeeper id="regCenter" server-lists="192.168.56.101:2181" namespace="dd-job" base-sleep-time-milliseconds="1000" max-sleep-time-milliseconds="3000" max-retries="3" />
 
     <!-- 配置简单作业-->
-    <job:simple id="simpleElasticJob" monitor-port="9888" class="com.job.elastic.MyElasticJob" registry-center-ref="regCenter" cron="0/10 * * * * ?" sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C" />
+    <job:simple id="simpleElasticJob" monitor-port="9888" class="com.module.job.elastic.MyElasticJob" registry-center-ref="regCenter" cron="0/10 * * * * ?" sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C" />
 
     <!--<bean id="yourRefJobBeanId" class="xxx.MySimpleRefElasticJob">-->
         <!--<property name="fooService" ref="xxx.FooService"/>-->
