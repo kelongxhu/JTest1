@@ -1,5 +1,7 @@
 package com.module.okhttp;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -15,6 +17,8 @@ import okhttp3.ResponseBody;
 import sun.rmi.runtime.Log;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author ke.long
@@ -199,4 +203,22 @@ public class CallOkHttp {
             return response;
         }
     }
+
+
+    static void method3(){
+        System.out.println("List<String>转化示例开始----------");
+        List<String> list = new ArrayList<String>();
+        list.add("fastjson1");
+        list.add("fastjson2");
+        list.add("fastjson3");
+        String jsonString = JSON.toJSONString(list);
+        System.out.println("json字符串:"+jsonString);
+
+        //解析json字符串
+        List<String> list2 = JSON.parseObject(jsonString,new TypeReference<List<String>>(){});
+        System.out.println(list2.get(0)+"::"+list2.get(1)+"::"+list2.get(2));
+        System.out.println("List<String>转化示例结束----------");
+
+    }
+
 }

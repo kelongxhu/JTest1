@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import java.util.Arrays;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -140,6 +141,15 @@ public class Test1 {
         System.out.println(Boolean.parseBoolean("true"));
 
 
+        System.out.println();
+
+        AtomicInteger cycleCount = new AtomicInteger(0);
+
+        for (int i=0;i<10;i++){
+            int cycleNo = cycleCount.addAndGet(1);
+            System.out.println(cycleNo/2);
+            System.out.println(cycleNo/2<=1);
+        }
     }
 
     public static boolean isOdd(int i){
