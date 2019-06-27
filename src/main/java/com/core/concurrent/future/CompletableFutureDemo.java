@@ -16,10 +16,10 @@ public class CompletableFutureDemo {
 
     public static void main(String[] args) throws Exception {
         //supplyAsync();
-        //testAllOf();
+        testAllOf();
         //testAnyOf();
         //testRunAsync();
-        thenApply();
+        //thenApply();
         //testExceptionally();
         //testWhenComplete();
     }
@@ -63,7 +63,7 @@ public class CompletableFutureDemo {
         CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> "cafei");
         CompletableFuture<String> future3 = CompletableFuture.supplyAsync(() -> "aaron");
 
-        System.out.println(future1.join());
+        //System.out.println(future1.join());
 
         CompletableFuture.allOf(future1, future2, future3)
                 .thenApply(v ->
@@ -72,6 +72,12 @@ public class CompletableFutureDemo {
                                 .collect(Collectors.joining("   ")))
                 .thenAccept(System.out::println);
     }
+
+
+    public static void allOf(){
+
+    }
+
 
     public static void testAnyOf() {
         Random rand = new Random();

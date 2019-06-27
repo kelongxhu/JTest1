@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
+import com.google.common.base.Stopwatch;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -44,6 +45,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import com.google.common.collect.Streams;
 
 /**
@@ -236,38 +238,38 @@ public class GuavaTest {
     }
 
     @Test
-    public void testPartitionList(){
-        Map<String,String> map=Maps.newHashMap();
-        map.put("1","a");
-        map.put("2","b");
-        map.put("3","c");
-        map.put("4","d");
-        map.put("5","e");
-        List<Integer> list= Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8);
-        List<String> values=Lists.partition(list,2).stream().map(subInputs->{
-            return subInputs.stream().map(l->map.get(String.valueOf(l))).collect(Collectors.toList());
+    public void testPartitionList() {
+        Map<String, String> map = Maps.newHashMap();
+        map.put("1", "a");
+        map.put("2", "b");
+        map.put("3", "c");
+        map.put("4", "d");
+        map.put("5", "e");
+        List<Integer> list = Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8);
+        List<String> values = Lists.partition(list, 2).stream().map(subInputs -> {
+            return subInputs.stream().map(l -> map.get(String.valueOf(l))).collect(Collectors.toList());
         }).flatMap(Collection::stream).collect(Collectors.toList());
         System.out.println(values);
     }
 
     @Test
-    public void testStream(){
+    public void testStream() {
         Stream<String> streamA = Stream.of("A", "B", "C");
-        Stream<String> streamB  = Stream.of("Apple", "Banana", "Carrot", "Doughnut");
+        Stream<String> streamB = Stream.of("Apple", "Banana", "Carrot", "Doughnut");
 
         List<String> zipped = Streams.zip(streamA,
                 streamB,
                 (a, b) -> a + " is for " + b)
                 .collect(Collectors.toList());
 
-        log.info("{}",JSON.toJSONString(zipped));
+        log.info("{}", JSON.toJSONString(zipped));
     }
 
-
     @Test
-    public void testMap(){
+    public void testMap() {
         Person p1 = new Person("001", "zhang_san");
         Person p2 = new Person("002", "li_si");
+        Person p3 = new Person("002", "li_s4");
 
         List<Person> personList = Lists.newArrayList();
         personList.add(p1);
@@ -283,42 +285,45 @@ public class GuavaTest {
         });
         System.out.println("将主键当作Map的Key:" + personMap);
 
-
         // 可以说是Maps.uniqueIndex相反的作用
         Set<Person> personSet = Sets.newHashSet(p1, p2);
         @SuppressWarnings("unused")
-        Map<Person, String> personAsMap= Maps.asMap(personSet, new Function() {
+        Map<Person, String> personAsMap = Maps.asMap(personSet, new Function() {
             @Override
             public Object apply(Object input) {
-                return ((Person)input).getId();
+                return ((Person) input).getId();
             }
         });
         System.out.println(personAsMap);
 
         // 转换Map中的value值
-        Map<String, String> transformValuesMap = Maps.transformValues(personMap, v->v.getName());
+        Map<String, String> transformValuesMap = Maps.transformValues(personMap, v -> v.getName());
         System.out.println("转换Map中的value值" + transformValuesMap);
-    }
 
+        //分组
+        Map<String, Map<String, Person>> groupMap = personList.stream().
+                collect(Collectors.groupingBy(Person::getId, Collectors.toMap(Person::getName, e -> e, (oldVal, newVal) -> newVal)));
+
+        System.out.println(groupMap);
+
+    }
 
     @Test
-    public void testTransformValues(){
-        ImmutableBiMap<String,String> map= ImmutableBiMap.of("read","query,list","write","save,update");
-        Map<String,List<String>> map2=Maps.transformValues(map,entity->Arrays.stream(entity.split(",")).
-                filter(s-> StringUtils.isNotBlank(s)).collect(Collectors.toList()));
-        log.info("{}",map2);
+    public void testTransformValues() {
+        ImmutableBiMap<String, String> map = ImmutableBiMap.of("read", "query,list", "write", "save,update");
+        Map<String, List<String>> map2 = Maps.transformValues(map, entity -> Arrays.stream(entity.split(",")).
+                filter(s -> StringUtils.isNotBlank(s)).collect(Collectors.toList()));
+        log.info("{}", map2);
 
-        String ss=map2.entrySet().stream().map(entry -> filter(entry)).filter(s->StringUtils.isNotBlank(s)).findFirst().orElse("");
+        String ss = map2.entrySet().stream().map(entry -> filter(entry)).filter(s -> StringUtils.isNotBlank(s)).findFirst().orElse("");
 
-        log.info("2{}",ss);
+        log.info("2{}", ss);
     }
 
-
-    private String filter(Map.Entry<String, List<String>> entry){
-        boolean flag=entry.getValue().stream().filter(e->"2saveUser".startsWith(e)).findFirst().isPresent();
-        return flag?entry.getKey():null;
+    private String filter(Map.Entry<String, List<String>> entry) {
+        boolean flag = entry.getValue().stream().filter(e -> "2saveUser".startsWith(e)).findFirst().isPresent();
+        return flag ? entry.getKey() : null;
     }
-
 
     class Person {
         private String Id;
@@ -332,45 +337,46 @@ public class GuavaTest {
         public String getId() {
             return Id;
         }
+
         public void setId(String id) {
             Id = id;
         }
+
         public String getName() {
             return name;
         }
+
         public void setName(String name) {
             this.name = name;
         }
     }
 
     @Test
-    public void testFluentIterable(){
-        Set set=Sets.newHashSet("a","b");
-        ImmutableListMultimap<String, String> groups = FluentIterable.from(set).index(l->Joiner.on("#").join(l,"x"));
-        log.info("{}",groups);
+    public void testFluentIterable() {
+        Set set = Sets.newHashSet("a", "b");
+        ImmutableListMultimap<String, String> groups = FluentIterable.from(set).index(l -> Joiner.on("#").join(l, "x"));
+        log.info("{}", groups);
     }
 
     @Test
-    public void testOptional(){
-        log.info("{}",Optional.ofNullable("").orElse("aa"));
+    public void testOptional() {
+        log.info("{}", Optional.ofNullable("").orElse("aa"));
 
         int hash = Hashing.consistentHash(Hashing.murmur3_32().hashString("c3uTGRY15LtbeR¶6704", Charset.defaultCharset()), 100);
         String partitionTable = "cipher_" + Math.abs(hash) % 100;
 
-        log.info("{}",partitionTable);
+        log.info("{}", partitionTable);
 
         log.info("{}", TimeUnit.MINUTES.toSeconds(1));
-
 
         Optional<Object> value = Optional.ofNullable("aaa");
 
         log.info(value.get().toString());
 
-
         String textWithSalt = "aa";
-        byte[] hash2=Hashing.sha256().hashString(textWithSalt, Charset.forName("utf-8")).asBytes();
-        String base64=BaseEncoding.base64().encode(hash2);
-        log.info("{},{}",hash2,base64);
+        byte[] hash2 = Hashing.sha256().hashString(textWithSalt, Charset.forName("utf-8")).asBytes();
+        String base64 = BaseEncoding.base64().encode(hash2);
+        log.info("{},{}", hash2, base64);
 
     }
 
@@ -388,7 +394,47 @@ public class GuavaTest {
                 .collect(Collectors.toList());
         stringList.forEach(e -> System.out.println(e));
 
-      List<Stream> s=words.stream().map(w->Arrays.stream(w.split(""))).collect(Collectors.toList());
+        List<Stream> s = words.stream().map(w -> Arrays.stream(w.split(""))).collect(Collectors.toList());
+    }
+
+    @Test
+    public void testPeek() {
+        List<String> nations = Arrays.asList("A", "B", "C", "A1");
+        nations.stream().
+                filter(nation -> {
+                    return nation.startsWith("A");
+                }).
+                peek(nation -> System.out.println(nation)).
+                map((t) -> {
+                    return t + "a";
+                }).
+                peek(nation -> System.out.println(nation)).
+                collect(Collectors.toList());
+    }
+
+    @Test
+    public void stopWatch()throws Exception{
+        // 创建stopwatch并开始计时
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        Thread.sleep(1980);
+        // 以秒打印从计时开始至现在的所用时间,向下取整
+        System.out.println(stopwatch.elapsed(TimeUnit.SECONDS)); // 1
+        // 停止计时
+        stopwatch.stop();
+        System.out.println(stopwatch.elapsed(TimeUnit.SECONDS)); // 1
+        // 再次计时
+        stopwatch.start();
+        Thread.sleep(100);
+        System.out.println(stopwatch.elapsed(TimeUnit.SECONDS)); // 2
+        // 重置并开始
+        stopwatch.reset().start();
+        Thread.sleep(1030);
+        // 检查是否运行
+        System.out.println(stopwatch.isRunning()); // true
+        long millis = stopwatch.elapsed(TimeUnit.MILLISECONDS); // 1031
+        System.out.println(millis);
+        // 打印
+        System.out.println(stopwatch.toString()); // 1.03 s
     }
 
 }

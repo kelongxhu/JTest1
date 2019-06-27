@@ -156,4 +156,16 @@ public class Test1 {
         return i%2 == 1;
     }
 
+
+    @Test
+    public void testLog4j(){
+        StringBuffer sb=new StringBuffer("aaaaaaaaaaa");
+        sb.setLength(0);
+        System.out.println("sb:"+sb.toString());
+        sb.append("xxxxx");
+        System.out.println("sb:"+sb.toString());
+        System.out.println("sb:"+sb.capacity());
+
+    }
+
 }
