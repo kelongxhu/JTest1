@@ -555,6 +555,12 @@
             <artifactId>sentinel-parameter-flow-control</artifactId>
             <version>1.6.0</version>
         </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.36.Final</version>
+        </dependency>
+
 
 
 

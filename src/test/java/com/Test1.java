@@ -6,6 +6,7 @@ import com.dao.entity.User2;
 import com.google.common.base.Stopwatch;
 import com.redis.A;
 import com.util.BeanCopierUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
@@ -20,6 +21,7 @@ import java.util.regex.Pattern;
 /**
  * Created by kelong on 7/10/14.
  */
+@Slf4j
 public class Test1 {
     @Before
     public void before() {
