@@ -3,6 +3,7 @@ package com.util;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SpringContextUtils implements ApplicationContextAware {
 	public static ApplicationContext applicationContext;
-
+	@Override
 	public void setApplicationContext(ApplicationContext applicationContext)
 			throws BeansException {
 		SpringContextUtils.applicationContext = applicationContext;
@@ -34,6 +35,18 @@ public class SpringContextUtils implements ApplicationContextAware {
 
 	public static Class<? extends Object> getType(String name) {
 		return applicationContext.getType(name);
+	}
+
+	/**
+	 * 发布事件
+	 *
+	 * @param event
+	 */
+	public static void publishEvent(ApplicationEvent event) {
+		if (applicationContext == null) {
+			return;
+		}
+		applicationContext.publishEvent(event);
 	}
 
 }

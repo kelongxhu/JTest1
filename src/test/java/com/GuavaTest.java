@@ -261,12 +261,8 @@ public class GuavaTest {
                 streamB,
                 (a, b) -> a + " is for " + b)
                 .collect(Collectors.toList());
-<<<<<<< HEAD
 
         log.info("{}", JSON.toJSONString(zipped));
-=======
-        log.info("{}",JSON.toJSONString(zipped));
->>>>>>> 4737680cf6d850ccc386a53bfe098c90da346bb4
     }
 
     @Test

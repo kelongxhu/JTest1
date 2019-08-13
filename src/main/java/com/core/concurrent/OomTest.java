@@ -7,12 +7,14 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author ke.long
  * @since 2019/6/19 10:07
  */
 public class OomTest {
+
     public static void main(String[] args) {
         try {
             //准备url

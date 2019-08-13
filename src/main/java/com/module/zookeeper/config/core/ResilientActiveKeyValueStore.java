@@ -1,5 +1,6 @@
 package com.module.zookeeper.config.core;
 
+import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.Watcher;
@@ -275,5 +276,10 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher implements Z
     @Override
     public void close() throws InterruptedException {
         super.close();
+    }
+
+    @Override
+    public void subscribeChildChanges(String path, PathChildrenCacheListener listener) throws Exception {
+
     }
 }

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.dao.entity.User;
 import com.dao.entity.User2;
 import com.google.common.base.Stopwatch;
+import com.google.common.collect.ImmutableList;
 import com.redis.A;
 import com.util.BeanCopierUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import org.junit.Test;
 import org.springframework.beans.BeanUtils;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -167,7 +169,51 @@ public class Test1 {
         sb.append("xxxxx");
         System.out.println("sb:"+sb.toString());
         System.out.println("sb:"+sb.capacity());
+    }
 
+    @Test
+    public void test3(){
+        //String s0="zxy";
+        String s1=new String("z")+new String("xy");
+        System.out.println(s1==s1.intern());
+
+        String str3 = new String("2") + new String("2");
+        str3.intern();  //常量池存储的str3引用
+        String str4 = "22";//  什么都不做， str4返回str3引用
+        System.out.println(str3 == str4);
+    }
+
+
+    @Test
+    public void test4()throws Exception{
+        Thread thread=new Thread(()->{
+            try {
+                System.out.println("线程启动");
+                Thread.sleep(10000);
+                System.out.println("hello");
+            } catch (InterruptedException e) {
+                System.out.println("线程中断");
+                System.out.println("线程中断状态："+Thread.currentThread().isInterrupted());
+                Thread.currentThread().interrupt();
+            }
+            System.out.println("线程中断状态："+Thread.currentThread().isInterrupted());
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
+        thread.interrupt();
+        Thread.sleep(1000000000);//
+    }
+
+    @Test
+    public void test5(){
+        List<Integer> a= ImmutableList.of(1,2);
+        List<Integer> b=ImmutableList.copyOf(a);
+        List<Integer> c=ImmutableList.copyOf(a);
+        System.out.println(JSON.toJSONString(c));
     }
 
 }

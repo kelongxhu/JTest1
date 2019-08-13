@@ -16,6 +16,7 @@ public class HttpContentTraceInterceptor implements HandlerInterceptor {
 
     private final Logger httpLogger = LoggerFactory.getLogger("com.httpDetailLog");
 
+    @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
         if (httpLogger.isDebugEnabled() && handler instanceof HandlerMethod) {
@@ -25,11 +26,11 @@ public class HttpContentTraceInterceptor implements HandlerInterceptor {
 
         return true;
     }
-
+    @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
 
     }
-
+    @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
 
     }

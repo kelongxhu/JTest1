@@ -1,6 +1,9 @@
 package com.module.zookeeper.config.core;
 
 import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.recipes.cache.PathChildrenCache;
+import org.apache.curator.framework.recipes.cache.PathChildrenCache.StartMode;
+import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
 import org.apache.curator.utils.CloseableUtils;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.Watcher;
@@ -29,7 +32,7 @@ public class CuratorClientFactory implements ZkOperate {
         Stat stat = client.checkExists().forPath(path);
         if (stat == null) {
             client.create().forPath(path, value.getBytes());
-        }else {
+        } else {
             client.setData().forPath(path, value.getBytes());
         }
     }
@@ -41,12 +44,12 @@ public class CuratorClientFactory implements ZkOperate {
 
     @Override
     public boolean exists(String path) throws Exception {
-        return client.checkExists().forPath(path)!=null;
+        return client.checkExists().forPath(path) != null;
     }
 
     @Override
     public String read(String path, Watcher watcher, Stat stat) throws Exception {
-        byte[] data= client.getData().usingWatcher(watcher).forPath(path);
+        byte[] data = client.getData().usingWatcher(watcher).forPath(path);
         return new String(data);
     }
 
@@ -72,5 +75,14 @@ public class CuratorClientFactory implements ZkOperate {
     @Override
     public void close() throws Exception {
         CloseableUtils.closeQuietly(client);
+    }
+
+    @Override
+    public void subscribeChildChanges(String path, PathChildrenCacheListener listener) throws Exception {
+        final PathChildrenCache cache = new PathChildrenCache(client, path, true);
+        //5、设定监听的模式 ,异步初始化，初始化完成触发事件 PathChildrenCacheEvent.Type.INITIALIZED
+        cache.start(StartMode.POST_INITIALIZED_EVENT);
+        //创建监听器
+        cache.getListenable().addListener(listener);
     }
 }
