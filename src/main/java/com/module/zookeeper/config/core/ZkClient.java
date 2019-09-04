@@ -13,7 +13,7 @@ import java.util.List;
  * @author ke.long
  * @since 2019/5/5 15:14
  */
-public interface ZkOperate {
+public interface ZkClient {
     void connect(String hosts) throws IOException, InterruptedException;
 
     void write(String path, String value) throws Exception;

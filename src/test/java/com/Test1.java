@@ -6,7 +6,6 @@ import com.dao.entity.User2;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.ImmutableList;
 import com.redis.A;
-import com.util.BeanCopierUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -214,6 +213,14 @@ public class Test1 {
         List<Integer> b=ImmutableList.copyOf(a);
         List<Integer> c=ImmutableList.copyOf(a);
         System.out.println(JSON.toJSONString(c));
+
+        ThreadLocal<Integer> tl=new ThreadLocal<>();
+        tl.set(5);
+        ThreadLocal<String> tl2=new ThreadLocal<>();
+        tl2.set("6");
+        String value=tl2.get();
+        System.out.println(value);
+
     }
 
 }

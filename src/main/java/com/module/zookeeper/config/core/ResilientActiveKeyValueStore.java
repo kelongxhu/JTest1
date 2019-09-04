@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  * @author liaoqiqi
  * @version 2014-7-7
  */
-public class ResilientActiveKeyValueStore extends ConnectionWatcher implements ZkOperate {
+public class ResilientActiveKeyValueStore extends ConnectionWatcher implements ZkClient {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(ResilientActiveKeyValueStore.class);
 

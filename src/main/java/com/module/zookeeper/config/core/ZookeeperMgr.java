@@ -21,7 +21,7 @@ public class ZookeeperMgr {
     protected static final Logger LOGGER = LoggerFactory.getLogger(ZookeeperMgr.class);
 
     //private ResilientActiveKeyValueStore store;
-    private ZkOperate store;
+    private ZkClient store;
 
     private String curHost = "";
     private String curDefaultPrefixString = "";

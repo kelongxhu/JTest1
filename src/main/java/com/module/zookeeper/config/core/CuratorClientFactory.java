@@ -17,7 +17,7 @@ import java.util.List;
  * @author ke.long
  * @since 2019/5/5 15:12
  */
-public class CuratorClientFactory implements ZkOperate {
+public class CuratorClientFactory implements ZkClient {
 
     private CuratorFramework client;
 

@@ -2,7 +2,7 @@ package com.module.zookeeper.config.server;
 
 import com.alibaba.fastjson.JSON;
 import com.module.zookeeper.config.core.CuratorClientFactory;
-import com.module.zookeeper.config.core.ZkOperate;
+import com.module.zookeeper.config.core.ZkClient;
 
 /**
  * @author ke.long
@@ -10,7 +10,7 @@ import com.module.zookeeper.config.core.ZkOperate;
  */
 public class WatcherTest {
     public static void main(String[] args) throws Exception {
-        ZkOperate zk = new CuratorClientFactory();
+        ZkClient zk = new CuratorClientFactory();
         zk.connect("192.168.56.101:2181");
         zk.subscribeChildChanges("/config",(cf, event)->{
             switch (event.getType()) {
@@ -22,7 +22,6 @@ public class WatcherTest {
                     System.out.println("添加子节点,路径:" + event.getData().getPath()+"更改数据:"+new String(event.getData().getData())+"节点状态:"+event.getData().getStat());
                     break;
                 case CHILD_UPDATED:
-
                     System.out.println("更新子节点,路径:" + event.getData().getPath()+"更改数据:"+new String(event.getData().getData())+"节点状态:"+event.getData().getStat());
                     break;
                 case CHILD_REMOVED:
