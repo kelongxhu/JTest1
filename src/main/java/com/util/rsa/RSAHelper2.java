@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RSAHelper2 {
-    private static Log LOGGER = LogFactory.getLog(RSAHelper.class);
+    private static Log LOGGER = LogFactory.getLog(RSAHelper2.class);
     public static final String SIGNATURE_ALGORITHM = "SHA1withRSA";
     public static final String KEY_ALGORITHM = "RSA";
     private static final int MAX_ENCRYPT_BLOCK = 117;

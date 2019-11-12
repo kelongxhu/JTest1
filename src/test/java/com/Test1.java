@@ -6,11 +6,13 @@ import com.dao.entity.User2;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.ImmutableList;
 import com.redis.A;
+import com.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
 
+import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -221,6 +223,14 @@ public class Test1 {
         String value=tl2.get();
         System.out.println(value);
 
+    }
+
+    @Test
+    public void fileTest()throws Exception{
+        String urlStrEncode="_%E8%B5%84%E9%87%91%E8%87%AA%E8%90%A5%E5%8F%B0%E8%B4%A6.xlsx_";
+        String urlStrDecode = URLDecoder.decode(urlStrEncode, "utf-8");
+        System.out.println(urlStrDecode);
+        System.out.println(org.apache.commons.lang3.StringUtils.substring(urlStrDecode,0,5));
     }
 
 }
